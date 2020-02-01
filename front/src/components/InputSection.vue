@@ -1,26 +1,24 @@
 <template>
-    <div class="hello">
-        <div class="input" style="align-items: flex-end">
-            <form @submit.prevent="addPerson()">
-                <input type="text" placeholder="Enter a name here" v-model="person">
+    <v-app>
+        <div class="hello">
+            <form @submit.prevent="addPerson()" style="text-align: center">
+                <div class="d-flex pa-2">
+                    <v-text-field outlined true width full-width false placeholder="Enter a name here" v-model="person" hide-details true style="width: 50%; display: inline-block"/>
+                    <v-btn color="purple" v-on:click="calculate" :disabled="this.people.length < 3" style="display: inline-block; height:inherit">Let's buy some gifts!</v-btn>
+                </div>
             </form>
-                <button v-on:click="calculate" :disabled="this.people.length < 3">Let's buy some gifts!</button>
-
-        </div>
-            <p v-if="showValidation">
+            <p v-if="showValidation" class="warningMessage">
                 That name already exists
             </p>
-
-      <span v-for="(person, index) in people" :key="index">
-          {{person}} <img src="../assets/images/delete.png" height="10" width="10" v-on:click="removePerson(index)"/><br>
-      </span>
-      <br>
-      <span v-if="showResults" v-for="(buyer, index) in result" :key="index">
-        <b>{{buyer}}</b> will buy for <b>{{result[buyer]}}</b><br>
-      </span>
-
-
-  </div>
+            <span v-for="(person, index) in people" :key="index" class="addedNames">
+              {{person}} <img src="../assets/images/delete.png" height="10" width="10" v-on:click="removePerson(index)"/><br>
+            </span>
+            <br>
+                <span v-if="showResults" v-for="(buyer, index) in result" :key="index">
+                    <b>{{buyer}}</b> will buy for <b>{{result[buyer]}}</b><br>
+                </span>
+        </div>
+    </v-app>
 </template>
 
 <script>
