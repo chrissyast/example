@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default axios.create({
-    baseURL: `http://192.168.1.207:3000/`,
+    baseURL: server(),
     headers: {
          'Content-Type': 'application/json'
     },
@@ -9,5 +9,14 @@ export default axios.create({
     xsrfHeaderName: 'X-CSRFToken',
     withCredentials: true
 });
+
+function server() {
+   switch (process.env.NODE_ENV) {
+       case "development":
+           return process.env.VUE_APP_BACKEND_SERVER;
+       default:
+           return null;
+   }
+}
 
 
