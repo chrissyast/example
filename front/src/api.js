@@ -7,16 +7,11 @@ export default axios.create({
     },
     xsrfCookieName: 'csrftoken',
     xsrfHeaderName: 'X-CSRFToken',
-    withCredentials: true
+    withCredentials: false
 });
 
 function server() {
-   switch (process.env.NODE_ENV) {
-       case "development":
-           return process.env.VUE_APP_BACKEND_SERVER;
-       default:
-           return null;
-   }
+   return process.env.VUE_APP_BACKEND_SERVER;
 }
 
 
